@@ -15,4 +15,9 @@ class User < ApplicationRecord
     manager: 2,
     admin: 3
   }
+
+  ###
+  # integrer la notion de scopes et de privileges
+  ##
+  #
 end
