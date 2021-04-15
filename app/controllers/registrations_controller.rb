@@ -1,5 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
   respond_to :json
+  before_action :authenticate_user!, only: [:update]
+  before_action :user_params, only: [:update]
   before_action :sign_up_params_verifications, only: [:create]
   I18n.locale = :fr
 
@@ -10,7 +12,26 @@ class RegistrationsController < Devise::RegistrationsController
     render json: resource, status: :created 
   end
   
+  def update
+    if current_user.update(user_params)
+      render json: current_user, status: :ok
+    else
+      normalized_errors = ["A6"]
+      errors = I18n.t("errorA6")
+      render json: {
+        "error_codes" => normalized_errors,
+        "translated" => errors
+      }, status: :bad_request
+    end
+  end
+  
   private
+
+  def user_params
+    params
+      .require(:user)
+      .permit(:role, :latitude, :longitude, :zip_code, :adress, :country)
+  end
 
   def sign_up_params_verifications
     email_regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i

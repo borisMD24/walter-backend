@@ -9,4 +9,10 @@ class User < ApplicationRecord
          :jwt_authenticatable, 
          jwt_revocation_strategy: self
 
+  enum role:{
+    client: 0,
+    employee: 1,
+    manager: 2,
+    admin: 3
+  }
 end

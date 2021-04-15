@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :articles
   Rails.application.routes.default_url_options[:host] = 'localhost:3000'
 
   devise_for :users,
@@ -14,5 +13,9 @@ Rails.application.routes.draw do
       sessions: 'sessions',
       registrations: 'registrations'
     }
-
+    namespace :api do
+      resources :articles
+      resources :users
+    end
+    
 end
