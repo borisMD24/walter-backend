@@ -1,0 +1,7 @@
+fr:
+  hello: "Bonjour Monde"
+  errorA1: "Email non valide"
+  errorA2: "Mot de passe non valide"
+  errorA3: "Email non renseigné"
+  errorA4: "Mot de passe non renseigné"
+  errorA5: "L'email renseigné est déjà utilisé"
