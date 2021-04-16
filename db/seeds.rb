@@ -18,4 +18,3 @@ end
 puts "*" * 20
 puts "Users"
 tp User.all
-
