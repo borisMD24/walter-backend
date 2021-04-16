@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   include Devise::JWT::RevocationStrategies::Allowlist
 
-  has_many :order
+  has_many :orders
 
   devise :database_authenticatable, 
          :registerable,
@@ -21,7 +21,8 @@ class User < ApplicationRecord
   # integrer la notion de scopes et de privileges
   ##
   #
-  def order
-    Order.where(user: self)
-  end
+  # Pas nécessaire en fait?
+  # def order
+  #   Order.where(user: self)
+  # end
 end
