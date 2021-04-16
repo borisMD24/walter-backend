@@ -18,15 +18,3 @@ end
 puts "*" * 20
 puts "Users"
 tp User.all
-
-# create random articles
-35.times do
-  Article.create!(
-    user_id: User.all.sample.id,
-    title: Faker::TvShows::Community.characters,
-    content: Faker::TvShows::Community.quotes
-  )
-end
-puts "*" * 20
-puts "Articles"
-tp Article.all

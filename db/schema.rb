@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_15_150847) do
+ActiveRecord::Schema.define(version: 2021_04_16_095118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,54 +26,20 @@ ActiveRecord::Schema.define(version: 2021_04_15_150847) do
     t.index ["user_id"], name: "index_allowlisted_jwts_on_user_id"
   end
 
-  create_table "articles", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_articles_on_user_id"
-  end
-
-  create_table "jwt_denylist", force: :cascade do |t|
-    t.string "jti", null: false
-    t.datetime "exp", null: false
-    t.index ["jti"], name: "index_jwt_denylist_on_jti"
-  end
-
-  create_table "order_instances", force: :cascade do |t|
-    t.bigint "products_id"
-    t.bigint "order_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "shop_id"
-    t.bigint "orders_id"
-    t.index ["order_id"], name: "index_order_instances_on_order_id"
-    t.index ["orders_id"], name: "index_order_instances_on_orders_id"
-    t.index ["products_id"], name: "index_order_instances_on_products_id"
-    t.index ["shop_id"], name: "index_order_instances_on_shop_id"
-  end
-
   create_table "orders", force: :cascade do |t|
+    t.bigint "users_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
-  end
-
-  create_table "product_order_instances", force: :cascade do |t|
-    t.bigint "order_instances_id"
-    t.bigint "products_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_instances_id"], name: "index_product_order_instances_on_order_instances_id"
-    t.index ["products_id"], name: "index_product_order_instances_on_products_id"
+    t.index ["users_id"], name: "index_orders_on_users_id"
   end
 
   create_table "products", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "shop_id"
+    t.float "price"
+    t.integer "quantity"
+    t.string "description"
     t.index ["shop_id"], name: "index_products_on_shop_id"
   end
 
@@ -96,7 +62,7 @@ ActiveRecord::Schema.define(version: 2021_04_15_150847) do
     t.string "zip_code"
     t.string "adress"
     t.string "country"
-    t.bigint "shop_id", default: 0
+    t.bigint "shop_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["shop_id"], name: "index_users_on_shop_id"
