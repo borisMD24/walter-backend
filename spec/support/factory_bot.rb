@@ -6,3 +6,6 @@ FactoryBot.define do
       password  { "coucoutest" }
     end
 end
+
+
+  

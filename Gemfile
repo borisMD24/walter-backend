@@ -44,6 +44,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 gem 'devise-jwt'
+gem 'devise_token_auth'
 gem 'dotenv-rails'
 gem 'rack-cors'
 gem 'jsonapi-rails'
