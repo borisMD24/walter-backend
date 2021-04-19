@@ -18,3 +18,13 @@ end
 puts "*" * 20
 puts "Users"
 tp User.all
+
+# create random shops
+5.times do 
+  Shop.create!(
+    name: Faker::Commerce.department
+  )
+end
+puts "*" * 20
+puts "shops"
+tp Shop.all

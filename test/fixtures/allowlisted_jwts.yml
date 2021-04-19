@@ -1,9 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+<<<<<<< HEAD:test/fixtures/instances.yml
+  order: one
+
+two:
+  order: two
+=======
   jti: MyString
   aud: MyString
 
 two:
   jti: MyString
   aud: MyString
+>>>>>>> 980afbe52d4b23d39b1b78d8e1eb61787ba7641e:test/fixtures/allowlisted_jwts.yml

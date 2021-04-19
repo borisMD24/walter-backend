@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  resources :product_order_instances
-  resources :order_instances
-  resources :products
-  resources :shops
-  resources :orders
   Rails.application.routes.default_url_options[:host] = 'localhost:3000'
 
   devise_for :users,
@@ -19,7 +14,6 @@ Rails.application.routes.draw do
       registrations: 'registrations'
     }
     namespace :api do
-          resources :users
-    end
-    
+      resources :users
+    end  
 end
