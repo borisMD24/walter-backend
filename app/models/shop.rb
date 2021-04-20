@@ -1,4 +1,4 @@
 class Shop < ApplicationRecord
     has_many :products
-    belongs_to :user
+    has_many :user
 end
