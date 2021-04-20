@@ -32,10 +32,12 @@ RSpec.describe RegistrationsController do
       request.headers.merge!(user.create_new_auth_token)
       put 'http://localhost:3000/signup',
         :params => {
-          :email => user.email,
-          :current_password => user.password,
-          :password => "coucou123",
-          :password_confirmation => "coucou123"
+          :user => {
+            :email => user.email,
+            :current_password => user.password,
+            :password => "coucou123",
+            :password_confirmation => "coucou123"
+          }
         }
     end
 
