@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   include Devise::JWT::RevocationStrategies::Allowlist
-
+  has_one :shop
   has_many :orders
 
   devise :database_authenticatable, 
@@ -16,13 +16,29 @@ class User < ApplicationRecord
     manager: 2,
     admin: 3
   }
-
+  def role_to_enum (role)
+    case role
+    when "client" then return 0
+    when "employee" then return 1
+    when "manager" then return 2
+    when "admin" then return 3
+      else
+        return -1
+    end
+  end
+  def upgrade_to(status)
+    digit = role_to_enum(status)
+    if(digit < 0)
+        return 0
+      else
+        self.update(role: digit)
+    end
+  end
+  def attach_shop(shop)
+    self.update(shop: shop)
+  end
   ###
   # integrer la notion de scopes et de privileges
   ##
   #
-  # Pas nécessaire en fait?
-  # def order
-  #   Order.where(user: self)
-  # end
 end

@@ -5,3 +5,5 @@ fr:
   errorA3: "Email non renseigné"
   errorA4: "Mot de passe non renseigné"
   errorA5: "L'email renseigné est déjà utilisé"
+
+  errorR3: "L'elevation de privilege demandee est impossible ou illogique."

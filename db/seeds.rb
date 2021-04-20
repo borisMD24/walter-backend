@@ -28,3 +28,12 @@ end
 puts "*" * 20
 puts "shops"
 tp Shop.all
+
+5.times do
+  Product.create!(
+    shop: Shop.all.sample
+  )
+end
+puts "*" * 20
+puts "Product"
+tp Product.all
