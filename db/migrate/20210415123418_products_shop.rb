@@ -2,6 +2,7 @@ class ProductsShop < ActiveRecord::Migration[6.1]
   def change 
     change_table :products do |t|
       t.references :shop
+      t.string :name
       t.float :price
       t.integer :quantity
       t.string :description

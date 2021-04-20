@@ -30,7 +30,7 @@ class RegistrationsController < Devise::RegistrationsController
   def user_params
     params
       .require(:user)
-      .permit(:role, :latitude, :longitude, :zip_code, :adress, :country)
+      .permit(:role, :email, :latitude, :longitude, :zip_code, :adress, :country, :shop_id)
   end
 
   def sign_up_params_verifications
