@@ -5,7 +5,6 @@ RSpec.describe Api::UsersController do
         before do
             user = FactoryBot.create(:user)
             sign_in user
-            request.headers.merge!(user.create_new_auth_token)
             get 'http://localhost:3000/api/users/1'
         end
     end
@@ -15,7 +14,10 @@ RSpec.describe Api::UsersController do
     end
 
     it "JSON body response contains expected attributes" do
-        json_response = JSON.parse(response.body)
+        json_response = JSON.parse(response)
+        puts 20*"."
+        puts json_response
+        puts 20*"."
         expect(json_response.data.attributes.email).to match_array(user.email)
     end
 end
