@@ -1,7 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
   respond_to :json
   before_action :authenticate_user!, only: [:update]
-  before_action :user_params, only: [:update]
+ 
   before_action :sign_up_params_verifications, only: [:create]
   I18n.locale = :fr
 
@@ -13,6 +13,9 @@ class RegistrationsController < Devise::RegistrationsController
   end
   
   def update
+    puts current_user
+    puts params
+    puts user_params
     if current_user.update(user_params)
       render json: current_user, status: :ok
     else
@@ -30,7 +33,19 @@ class RegistrationsController < Devise::RegistrationsController
   def user_params
     params
       .require(:user)
-      .permit(:role, :email, :latitude, :longitude, :zip_code, :adress, :country, :shop_id)
+      .permit(
+        :role, 
+        :email, 
+        :latitude,
+        :longitude,
+        :zip_code,
+        :adress, 
+        :country, 
+        :shop_id, 
+        :password, 
+        :current_password, 
+        :password_confirmation
+      )
   end
 
   def sign_up_params_verifications

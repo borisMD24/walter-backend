@@ -42,12 +42,16 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# Authentication
 gem 'devise'
 gem 'devise-jwt'
+gem 'warden-jwt_auth'
 gem 'devise_token_auth'
 gem 'dotenv-rails'
 gem 'rack-cors'
 gem 'jsonapi-rails'
+
+# seed and usage
 gem 'faker'
 gem 'table_print'
 

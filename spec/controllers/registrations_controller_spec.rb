@@ -28,8 +28,7 @@ RSpec.describe RegistrationsController do
     before do
       @request.env["devise.mapping"] = Devise.mappings[:users]
       user = FactoryBot.create(:user)
-      sign_in user
-      request.headers.merge!(user.create_new_auth_token)
+      sign_in user                    ###devise method to authenticate user easily
       put 'http://localhost:3000/signup',
         :params => {
           :user => {
@@ -39,6 +38,7 @@ RSpec.describe RegistrationsController do
             :password_confirmation => "coucou123"
           }
         }
+        
     end
 
     it "returns http success" do
@@ -49,7 +49,5 @@ RSpec.describe RegistrationsController do
       json_response = JSON.parse(response.body)
       expect(json_response.keys).to match_array(["id", "email", "role", "latitude", "longitude", "zip_code", "adress", "country", "shop_id", "created_at", "updated_at"])
     end
-
   end
-
 end
