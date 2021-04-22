@@ -3,6 +3,6 @@ class ShopController < ApplicationController
     def create
         current_user.upgrade_to("manager")
         shop = Shop.create()
-        current_user.attach_shop(shop: shop)
+        current_user.attach_shop(shop)
     end
 end
