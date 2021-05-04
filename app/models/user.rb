@@ -38,7 +38,7 @@ class User < ApplicationRecord
     end
   end
 
-  def attach_shop(shop)
+  def bind_shop(shop)
     self.update(shop: shop)
   end
   ###

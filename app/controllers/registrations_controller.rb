@@ -16,7 +16,7 @@ class RegistrationsController < Devise::RegistrationsController
     puts current_user
     puts params
     puts user_params
-    if current_user.update(user_params)
+    if update_resource(current_user, user_params)
       render json: current_user, status: :ok
     else
       normalized_errors = ["A6"]
