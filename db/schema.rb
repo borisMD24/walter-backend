@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_22_065417) do
+ActiveRecord::Schema.define(version: 2021_07_24_214847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,57 +26,51 @@ ActiveRecord::Schema.define(version: 2021_04_22_065417) do
     t.index ["user_id"], name: "index_allowlisted_jwts_on_user_id"
   end
 
-  create_table "articles", force: :cascade do |t|
-    t.string "title"
+  create_table "lights", force: :cascade do |t|
+    t.string "name"
+    t.boolean "custom"
+    t.bigint "room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "state"
+    t.integer "r"
+    t.integer "g"
+    t.integer "b"
+    t.integer "id_ip"
+    t.index ["room_id"], name: "index_lights_on_room_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "state"
+  end
+
+  create_table "theme_lights", force: :cascade do |t|
+    t.integer "r"
+    t.integer "g"
+    t.integer "b"
+    t.bigint "light_id"
+    t.bigint "room_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "theme_id"
+    t.index ["light_id"], name: "index_theme_lights_on_light_id"
+    t.index ["room_id"], name: "index_theme_lights_on_room_id"
+    t.index ["theme_id"], name: "index_theme_lights_on_theme_id"
+  end
+
+  create_table "themes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "timelines", force: :cascade do |t|
     t.text "content"
-    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_articles_on_user_id"
-  end
-
-  create_table "jwt_denylist", force: :cascade do |t|
-    t.string "jti", null: false
-    t.datetime "exp", null: false
-    t.index ["jti"], name: "index_jwt_denylist_on_jti"
-  end
-
-  create_table "order_instances", force: :cascade do |t|
-    t.bigint "order_id", null: false
-    t.bigint "product_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_id"], name: "index_order_instances_on_order_id"
-    t.index ["product_id"], name: "index_order_instances_on_product_id"
-  end
-
-  create_table "orders", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_orders_on_user_id"
-  end
-
-  create_table "products", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "shop_id"
-    t.string "name"
-    t.float "price"
-    t.integer "quantity"
-    t.string "description"
-    t.index ["shop_id"], name: "index_products_on_shop_id"
-  end
-
-  create_table "shops", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.float "latitude"
-    t.float "longitude"
-    t.string "zip_code"
-    t.string "adress"
-    t.string "country"
   end
 
   create_table "users", force: :cascade do |t|
@@ -87,20 +81,11 @@ ActiveRecord::Schema.define(version: 2021_04_22_065417) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "role", default: 0
-    t.float "latitude"
-    t.float "longitude"
-    t.string "zip_code"
-    t.string "adress"
-    t.string "country"
-    t.bigint "shop_id"
+    t.string "first_name"
+    t.integer "privilege_grade"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["shop_id"], name: "index_users_on_shop_id"
   end
 
   add_foreign_key "allowlisted_jwts", "users", on_delete: :cascade
-  add_foreign_key "order_instances", "orders"
-  add_foreign_key "order_instances", "products"
-  add_foreign_key "orders", "users"
 end

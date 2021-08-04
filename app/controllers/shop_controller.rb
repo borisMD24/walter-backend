@@ -1,7 +1,6 @@
 class ShopController < ApplicationController
   respond_to :json
   before_action :authenticate_user!
-  #before_action :shop_params
   before_action :set_shop
   def create
       current_user.upgrade_to("manager")
@@ -11,6 +10,7 @@ class ShopController < ApplicationController
   end
   def update
     @shop.update(shop_params(params))
+    render json: @shop
   end 
 
   private

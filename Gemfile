@@ -57,3 +57,11 @@ gem 'table_print'
 
 #translations
 gem 'i18n'
+
+gem 'net-http'
+
+gem 'json'
+
+gem 'pp'
+
+gem 'httparty'

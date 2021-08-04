@@ -10,6 +10,8 @@ class RegistrationsController < Devise::RegistrationsController
     resource.save
     sign_up(resource_name, resource) if resource.persisted?
     render json: resource, status: :created 
+
+    p resource
   end
   
   def update
@@ -36,15 +38,8 @@ class RegistrationsController < Devise::RegistrationsController
       .permit(
         :role, 
         :email, 
-        :latitude,
-        :longitude,
-        :zip_code,
-        :adress, 
-        :country, 
-        :shop_id, 
-        :password, 
-        :current_password, 
-        :password_confirmation
+        :privilege_grade,
+        :first_name
       )
   end
 

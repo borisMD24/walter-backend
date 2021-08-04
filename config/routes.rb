@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :timelines
+  resources :theme_lights
+  resources :themes
+  resources :lights
+  resources :rooms
   Rails.application.routes.default_url_options[:host] = 'localhost:3000'
 
   devise_for :users,
@@ -17,4 +22,5 @@ Rails.application.routes.draw do
       resources :users
     end
     resources :shop
+    post '/instruction/', to: 'instructions#create'
 end

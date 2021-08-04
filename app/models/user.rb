@@ -3,7 +3,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   include Devise::JWT::RevocationStrategies::Allowlist
   
-  belongs_to :shop, optional: true
   has_many :orders
 
   devise :database_authenticatable, 
@@ -20,10 +19,10 @@ class User < ApplicationRecord
 
   def role_to_enum (role)
     case role
-    when "client" then return 0
-    when "employee" then return 1
-    when "manager" then return 2
-    when "admin" then return 3
+      when "client" then return 0
+      when "employee" then return 1
+      when "manager" then return 2
+      when "admin" then return 3
       else
         return -1
     end
@@ -31,16 +30,26 @@ class User < ApplicationRecord
 
   def upgrade_to(status)
     digit = role_to_enum(status)
+    p status
     if(digit < 0)
         return 0
       else
-        self.update(role: digit)
+        p "////////////////|||||||||\\\\\\\\\\\\\\\\"
+        p "////////////////|||||||||\\\\\\\\\\\\\\\\"
+        p "////////////////|||||||||\\\\\\\\\\\\\\\\"
+        p self.update(role: digit)
+        p self
+        p "////////////////|||||||||\\\\\\\\\\\\\\\\"
+        p "////////////////|||||||||\\\\\\\\\\\\\\\\"
+        p "////////////////|||||||||\\\\\\\\\\\\\\\\"
     end
   end
 
   def bind_shop(shop)
     self.update(shop: shop)
   end
+
+  
   ###
   # integrer la notion de scopes et de privileges
   ##
