@@ -23,4 +23,5 @@ Rails.application.routes.draw do
     end
     resources :shop
     post '/instruction/', to: 'instructions#create'
+    mount ActionCable.server => '/cable'
 end
