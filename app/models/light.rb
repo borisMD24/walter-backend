@@ -44,6 +44,7 @@ class Light < ApplicationRecord
         p b
     end
     def set_color(r, g, b)
+        self.update(r: r, g: g, b: b)
         p (
                 Light.RGBtoXYZ(r, g, b)
         )
@@ -88,6 +89,9 @@ class Light < ApplicationRecord
         end
         return light
     end
+    def has_valid_color?
+        return (self.r != nil && self.g != nil && self.b != nil)
+    end
     def self.RGBtoXYZ(red, green, blue)
         if(red > 0.04045)
             red = ((red + 0.055) / (1.0 + 0.055) ** 2.4)
@@ -128,5 +132,9 @@ class Light < ApplicationRecord
                     Light.create(name: ph[light]["name"], custom: false, id_ip: light, room: Room.first)
             end
         end
+    end
+
+    def to_css_rgb
+        return "rgb(#{self.r}, #{self.g}, #{self.b})"
     end
 end
